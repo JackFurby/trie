@@ -1,4 +1,8 @@
 hello
 bye
 dog
+dogs
 cat
+do
+house
+because

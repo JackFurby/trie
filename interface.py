@@ -1,13 +1,11 @@
-"""STAR."""
+"""Trie."""
 import time
 from trie import Trie, Node, setup, save_trie, load_trie
 import sys
 
-#trie = Trie()
-#setup(trie)
-#save_trie(trie, 'example')
-trie = load_trie('example')  # Word list
+trie = Trie()
 
+# Runs until user exist
 while True:
 	"""Text interface for user"""
 	print()
@@ -15,6 +13,11 @@ while True:
 
 	if action == "\q":
 		sys.exit()
+	elif action == "saveTrie":
+		setup(trie)
+		save_trie(trie, 'example')
+	elif action == "loadTrie":
+		trie = load_trie('example')
 	elif action == "contains":
 		inputLetters = input("Enter a word to check: ")
 
@@ -66,6 +69,8 @@ while True:
 		print("=== Trie help ===")
 		print("")
 		print("\q			-	Exit Trie")
+		print("saveTrie		-	Saves all words in the file words/example.txt to the trie and .pkl file")
+		print("loadTrie		-	Loads a previously saved trie from words/example.pkl")
 		print("contains		-	Enter a single word to find out if it is accepted or not")
 		print("findWords		-	Find all words you can make with a given set of characters")
 		print("findWordsPrefix		-	Find all words you can make with a given set of characters + a prefix")
