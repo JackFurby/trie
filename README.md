@@ -1,12 +1,12 @@
-### Trie
+# Trie
 
 This repo contains a trie data structure that was initially implemented in my repo for [STAR](https://github.com/JackFurby/STAR) and thus does not have git history for that. If you wish to view it please visit STAR.
 
-### Definition
+## Definition
 
 A trie is a data structure used to store a dynamic set or associative array where the keys are usually strings. Each node will have a key who's value will be based on its position. This will be such that nodes before node X will be the prefix and nodes after will become the suffix. The root node is the empty string In this project a trie data structure will be used to store accepted words in a format that is efficient to search.
 
-#### node
+### node
 
 A trie is made up of nodes linked together. Each node is made up of a **value**, **indicator** and **pointers**. In my implementation the value is called data, indicator is called end and pointers are children.
 * The indicator is used to mark the current node as the end of a word.
@@ -151,5 +151,31 @@ def wordSearch(self, letters, suffix=None, contains=False, containsSet=False, cu
 
 	# return words found
 	return words
+
+```
+
+## Usage
+
+
+```
+
+$ git clone https://github.com/JackFurby/trie.git
+$ cd trie
+$ python interface.py
+
+```
+
+On start you will either have to load in a saved trie or create a new one.
+
+```python
+
+print("\q			-	Exit Trie")
+print("saveTrie			-	Saves all words in the file words/example.txt to the trie and .pkl file")
+print("loadTrie			-	Loads a previously saved trie from words/example.pkl")
+print("contains			-	Enter a single word to find out if it is accepted or not")
+print("findWords		-	Find all words you can make with a given set of characters")
+print("findWordsPrefix		-	Find all words you can make with a given set of characters + a prefix")
+print("findWordsSuffix		-	Find all words you can make with a given set of characters + a suffix")
+print("findWordsContains	-	Find all words you can make with a given set of characters + a set string")
 
 ```
