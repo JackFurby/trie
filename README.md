@@ -167,15 +167,16 @@ $ python interface.py
 
 On start you will either have to load in a saved trie or create a new one.
 
-```python
+```
+=== Trie help ===
 
-print("\q			-	Exit Trie")
-print("saveTrie			-	Saves all words in the file words/example.txt to the trie and .pkl file")
-print("loadTrie			-	Loads a previously saved trie from words/example.pkl")
-print("contains			-	Enter a single word to find out if it is accepted or not")
-print("findWords		-	Find all words you can make with a given set of characters")
-print("findWordsPrefix		-	Find all words you can make with a given set of characters + a prefix")
-print("findWordsSuffix		-	Find all words you can make with a given set of characters + a suffix")
-print("findWordsContains	-	Find all words you can make with a given set of characters + a set string")
+\q			-	Exit Trie
+saveTrie		-	Saves all words in the file words/example.txt to the trie and .pkl file
+loadTrie		-	Loads a previously saved trie from words/example.pkl
+contains		-	Enter a single word to find out if it is accepted or not
+findWords		-	Find all words you can make with a given set of characters
+findWordsPrefix		-	Find all words you can make with a given set of characters + a prefix
+findWordsSuffix		-	Find all words you can make with a given set of characters + a suffix
+findWordsContains	-	Find all words you can make with a given set of characters + a set string
 
 ```
