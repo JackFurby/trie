@@ -157,26 +157,68 @@ def wordSearch(self, letters, suffix=None, contains=False, containsSet=False, cu
 ## Usage
 
 
+Download or clone the repo into your project. You can remove all files but `trie.py` and the code will still function.
 ```
-
 $ git clone https://github.com/JackFurby/trie.git
-$ cd trie
-$ python interface.py
 
 ```
 
-On start you will either have to load in a saved trie or create a new one.
+The following fuctions are available
+``` Python
+import trie
 
-```
-=== Trie help ===
+# Create new trie
 
-\q			-	Exit Trie
-saveTrie		-	Saves all words in the file words/example.txt to the trie and .pkl file
-loadTrie		-	Loads a previously saved trie from words/example.pkl
-contains		-	Enter a single word to find out if it is accepted or not
-findWords		-	Find all words you can make with a given set of characters
-findWordsPrefix		-	Find all words you can make with a given set of characters + a prefix
-findWordsSuffix		-	Find all words you can make with a given set of characters + a suffix
-findWordsContains	-	Find all words you can make with a given set of characters + a set string
+trie = trie.Trie()
 
+# Populate from list
+
+exampleWords = ['example', 'tree', 'dog', 'cat', 'toffee', 'tea', 'coffee']
+trie.addWords(exampleWords)
+
+# Add single word
+
+trie.addWord('hello')
+
+# Check if the trie has a word
+
+inputLetters = input("Enter a word to check: ")
+# Makes sure input is in lower case
+inputLetters = inputLetters.lower()
+
+if trie.hasWord(inputLetters):
+	print("Yes")
+else:
+	print("No")
+
+# Check the trie for all words containing a list of letters
+
+inputLetters = input("Enter letters ('?' is a wildcard): ").lower()
+wordList = trie.wordSearch(list(inputLetters))
+for i in wordList:
+	print(i[0])
+
+# Check the trie for all words containing a list of letters and a Prefix
+
+prefixLetters = input("Enter prefix (in order): ").lower()
+inputLetters = input("Enter letters ('?' is a wildcard): ").lower()
+wordList = trie.prefix(list(inputLetters), prefixLetters)
+for i in wordList:
+	print(i[0])
+
+# Check the trie for all words containing a list of letters and a suffix
+
+suffixLetters = input("Enter suffix (in order): ").lower()
+inputLetters = input("Enter letters ('?' is a wildcard): ").lower()
+wordList = trie.wordSearch(list(inputLetters), suffix=suffixLetters)
+for i in wordList:
+	print(i[0])
+
+# Check the trie for all words containing a list of letters and a set string
+
+suffixLetters = input("Enter string words must contain (in order): ").lower()
+inputLetters = input("Enter letters ('?' is a wildcard): ").lower()
+wordList = trie.contains(list(inputLetters), suffixLetters)
+for i in wordList:
+	print(i[0])
 ```

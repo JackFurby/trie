@@ -1,7 +1,3 @@
-import glob
-import errno
-import pickle
-
 class Node:
 	"""Node object for trie."""
 
@@ -26,6 +22,9 @@ class Trie:
 		"""Add a word to the trie."""
 		currentNode = self.head
 
+		# make sure word is in lowercase
+		word = word.lower()
+
 		for i in range(len(word)):
 			# if letter already exists in children move to the node
 			if word[i] in currentNode.children:
@@ -42,9 +41,14 @@ class Trie:
 					currentNode.children[word[i]] = Node(True, [word])
 				currentNode = currentNode.children[word[i]]
 
+	def addWords(self, wordList):
+		"""Add a list of words to the trie"""
+		for word in wordList:
+			self.addWord(word)
+
 	def hasWord(self, word):
 		"""If the trie has the word being searched for return true."""
-		if word is '' or word is None:
+		if word == '' or word is None:
 			return False
 
 		currentNode = self.head
@@ -95,7 +99,7 @@ class Trie:
 				# only add word to words list
 				words.append([currentNode.data[0]])
 
-		if len(letters) is not 0:
+		if len(letters) != 0:
 			# i keeps track of current letter
 			# searched stop duplicate searches if input has repeated letters
 			i = 0
@@ -125,7 +129,7 @@ class Trie:
 							# Suffix word search
 							if suffix is not None:
 								words += self.wordSearch(newLetters, suffix=suffix, currentNode=currentNode.children[char])
-							# Regualr word search
+							# Regular word search
 							else:
 								words += self.wordSearch(newLetters, contains=contains, containsSet=containsSet, currentNode=currentNode.children[char])
 					elif letter in currentNode.children:
@@ -134,7 +138,7 @@ class Trie:
 						# Suffix word search
 						if suffix is not None:
 							words += self.wordSearch(newLetters, suffix=suffix, currentNode=currentNode.children[letter])
-						# Regualr word search
+						# Regular word search
 						else:
 							words += self.wordSearch(newLetters, contains=contains, containsSet=containsSet, currentNode=currentNode.children[letter])
 				i += 1
@@ -157,33 +161,4 @@ class Trie:
 			currentNode = currentNode.children[char]
 
 		# move over to regular wordSearch (with prefix in place)
-		return self.wordSearch(letters, currentNode)
-
-def setup(trie):
-	"""Add each word from csv files to trie data structure."""
-	path = './words/*.txt'
-	files = glob.glob(path)
-	for name in files:
-		try:
-			f = open(name, "r").read().splitlines()
-			lines = list(f)
-			print(len(lines), 'total words')
-			for word in lines:
-				# make sure word is in lowercase
-				word = word.lower()
-				trie.addWord(word)
-		except IOError as exc:
-			if exc.errno != errno.EISDIR:
-				raise
-
-
-def save_trie(trie, name):
-	"""Save a trie to a file."""
-	with open('./words/' + name + '.pkl', 'wb') as f:
-		pickle.dump(trie, f, pickle.HIGHEST_PROTOCOL)
-
-
-def load_trie(name):
-	"""Load a trie from a file."""
-	with open('./words/' + name + '.pkl', 'rb') as f:
-		return pickle.load(f)
+		return self.wordSearch(letters, currentNode=currentNode)
